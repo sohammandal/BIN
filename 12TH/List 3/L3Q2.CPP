@@ -1,0 +1,44 @@
+#include<iostream.h>
+#include<conio.h>
+struct date
+{
+ int Day;
+ int Month;
+ int Year;
+};
+class student
+{
+ int Admno;
+ char Sname[20];
+ date DOB;
+ public:
+ void input()
+ {
+ cout<<"Enter the admission value : ";
+ cin>>Admno;
+ cout<<"Enter the name of the student : ";
+ gets(Sname);
+ cout<<"Enter date of birth : ";
+ cout<<"\nDate:";
+ cin>>DOB.Day;
+ cout<<"\nMonth:";
+ cin>>DOB.Month;
+ cout<<"\nYear:";
+ cin>>DOB.Year;
+ }
+ void show()
+ {
+ cout<<Admno<<" "<<Sname<<" "<<DOB.Day<<DOB.Month<<DOB.Year;
+ }
+ DATE RDOB()
+ {
+ return DOB;
+ }
+}
+void main()
+{
+ student S1;
+ S1.input();
+ S1.show();
+ getch();
+}

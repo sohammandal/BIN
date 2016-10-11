@@ -1,0 +1,84 @@
+/*
+List-1
+Developed By-Shivam Raj , Shubham Kumar , Soham Mandal .
+Class-12 K
+*/
+#include<iostream.h>
+#include<conio.h>
+#include<process.h>
+void Series1()
+{
+ double N,X,sum=0,pro=1;
+ cout<<"Enter The Terms Upto Which :  ";
+ cin>>N;
+ cout<<"Enter The Number :  ";
+ cin>>X;
+ for(int i=0;i<N;i++)
+  {
+   pro*=X;
+   sum+=pro;
+  }
+  cout<<"The sum of terms is :\t"<<sum;
+ getch();
+}
+void Series2()
+{
+ double fact=1,sum=0;
+ double N,X,pro=1;
+ cout<<"Enter The Terms Upto Which :  ";
+ cin>>N;
+ cout<<"Enter The Number :  ";
+ cin>>X;
+ for(int i=1;i<=N;i++)
+  {
+   pro*=X;
+   fact*=i;
+   sum+=(pro/fact);
+  }
+  cout<<"The sum of terms is :\t"<<sum;
+ getch();
+}
+void Series3()
+{
+ double n,sum=0,term=0,term2=0;
+ cout<<"Enter the terms of sum required  : ";
+ cin>>n;
+ for(int i=1;i<=n;i++)
+ {
+  term+=2;
+  term2+=term;
+  sum+=term2;
+ }
+ cout<<"The sum is : "<<sum;
+ getch();
+}
+
+void main()
+{
+ clrscr();
+ int opt;
+ cout<<"Enter The Required Series : ";
+ cout<<"\n1.  X + X^2 + X^3...\n2.  U + U^2/2! + U^3/3!...\n3.  2+(2+4)+(2+4+6)...\n";
+ cin>>opt;
+ cout<<"\n";
+ switch(opt)
+ {
+  case 1 : Series1();break;
+  case 2 : Series2();break;
+  case 3 : Series3();break;
+  default :exit(1);break;
+ }
+ getch();
+}
+/*
+*******************OUTPUT****************
+Enter The Required Series :
+1.  X + X^2 + X^3...
+2.  U + U^2/2! + U^3/3!...
+3.  2+(2+4)+(2+4+6)...
+1
+
+Enter The Terms Upto Which :  3
+Enter The Number :  2
+The sum of terms is :   14
+*/

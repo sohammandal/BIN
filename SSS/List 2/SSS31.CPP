@@ -1,0 +1,31 @@
+/*
+ Developed by : Shivam , Shubham , Soham
+ Date : 18-12-14
+ List : 3
+ Program no : 22 d
+*/
+#include<iostream.h>
+#include<conio.h>
+void main()
+{
+ clrscr();
+ double neg=-1,x,n,term=1,sum=0;
+ cout<<"Enter value of N : ";
+ cin>>n;
+ cout<<"Enter value of X : ";
+ cin>>x;
+ for(int i=1;i<=n;i++)
+ {
+  neg*=neg;
+  term*=x;
+  sum+=neg*term;
+ }
+ cout<<"The sum of the series is : "<<sum;
+ getch();
+}
+/*
+*******OUTPUT*********
+Enter value of N : 9
+Enter value of X : 4
+The sum of the series is : 349524
+*/

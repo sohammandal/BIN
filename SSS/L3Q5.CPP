@@ -1,0 +1,27 @@
+//DONE BRILLIANTLY
+#include<iostream.h>
+#include<conio.h>
+long reverse(long n)
+{
+ long num=n,reverse=0,extract=0;
+ while(num!=0)
+ {
+ extract=num%10;
+ reverse=(reverse*10)+extract;
+ num/=10;
+ }
+ return reverse;
+}
+void main()
+{
+long n=0;
+clrscr();
+cout<<"Enter a Number: ";
+cin>>n;
+if (reverse(n)==n)
+cout<<"Palindrome!";
+else
+cout<<"Nope";
+getch();
+}
+

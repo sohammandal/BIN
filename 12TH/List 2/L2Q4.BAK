@@ -1,0 +1,80 @@
+/*
+List-2
+Developed By-Shivam Raj , Shubham Kumar , Soham Mandal .
+Class-12 K
+*/
+#include<iostream.h>
+#include<conio.h>
+#include<stdio.h>
+#include<stdlib.h>
+struct flight
+{
+	int flno;
+	char deptime[20],arrtime[20];
+	float fare;
+};
+void input(flight A[],int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		cout<<"Enter the Flight Number ";
+		cin>>A[i].flno;
+		cout<<"Enter the Departure Time ";
+		gets(A[i].deptime);
+		cout<<"Enter the Arrival Time ";
+		gets(A[i].arrtime);
+		cout<<"Enter the Fare ";
+		cin>>A[i].fare;
+	}
+}
+void output(flight A[],int n)
+{
+	for(int i=0;i<n;i++)
+	{
+		cout<<"Flight Number: "<<A[i].flno<<endl;
+		cout<<"Departure Time: "<<A[i].deptime<<endl;
+		cout<<"Arrival Time: "<<A[i].arrtime<<endl;
+		cout<<"Fare: "<<A[i].fare<<endl;
+	}
+}
+void farecomp(flight A[],int n)
+{
+	flight small=A[0];
+	int k=0;
+	for(int i=0;i<n;i++)
+	{
+		if(small.fare>A[i].fare)
+		{
+			small=A[i];
+			k=i;
+		}
+	}
+	cout<<"Flight Number: "<<A[k].flno<<endl;
+	cout<<"Departure Time: "<<A[k].deptime<<endl;
+	cout<<"Arrival Time: "<<A[k].arrtime<<endl;
+	cout<<"Fare: "<<A[k].fare<<endl;
+}
+void main()
+{
+	clrscr();
+	flight A[10];
+	int n,ch;
+	cout<<" Enter the number of Flights :";
+	for(int i=1;i<=4;i++)
+	{
+		cout<<"Press 1 to Enter Details "<<endl;
+		cout<<"Press 2 to Display Details "<<endl;
+		cout<<"Press 3 to Find the Most Economical Flight  "<<endl;
+		cout<<"Press 4 to Exit "<<endl;
+		cin>>ch;
+		switch(ch)
+		{
+			case 1:input(A,n);break;
+			case 2:output(A,n);break;
+			case 3:farecomp(A,n);break;
+			case 4:exit(1);break;
+		}
+	}
+	getch();
+}
+

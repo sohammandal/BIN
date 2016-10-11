@@ -1,0 +1,87 @@
+#include<iostream.h>
+#include<conio.h>
+#include<stdio.h>
+struct date
+{
+ int day, month, year;
+};
+class student
+{
+ int admno;
+ char sname[20];
+ date DOB;
+ public:
+ void input()
+ {
+  cout<<"Enter Adm. No.: ";cin>>admno;
+  cout<<"Enter Student Name: ";gets(sname);
+  cout<<"Enter Birth Date: ";cin>>DOB.day;
+  cout<<"Enter Birth Month: ";cin>>DOB.month;
+  cout<<"Enter Birth Year: ";cin>>DOB.year;
+ }
+ void show()
+ {
+  cout<<"Admn. No.: "<<admno;
+  cout<<"\nStudent Name: "<<sname;
+  cout<<"\nBirth Date: "<<DOB.day;
+  cout<<"\nBirth Month: "<<DOB.month;
+  cout<<"\nBirth Year: "<<DOB.year;
+ }
+ date rDOB()
+ {
+  return DOB;
+ }
+};
+void enter(student a[5],int n);
+void display(student a[5],int n);
+void birthday(student a[5],int n);
+void main()
+{
+ clrscr();
+ int n,opt,exit=0;
+ student a[5];
+ cout<<"Enter number of students: ";cin>>n;
+ do
+ {
+  cout<<"What would you like to do?\n";
+  cout<<"1. Enter details of students  2. Display details of students\n3. Display details of students born on 1/1 or 2/2 or 3/3 of 1990.";
+  cin>>opt;
+  if (opt==1)
+  enter(a,n);
+  else if (opt==2)
+  display(a,n);
+  else if (opt==3)
+  birthday(a,n);
+  else
+  exit++;
+ }while(!exit);
+ cout<<"Thanks!";
+ getch();
+ getch();
+}
+void enter(student a[5],int n)
+{
+ for (int i=0;i<n;i++)
+ a[i].input();
+}
+void display(student a[5],int n)
+{
+ for (int i=0;i<n;i++)
+ a[i].show();
+}
+void birthday(student a[5],int n)
+{
+ date d1={1,1,1990};
+ date d2={2,2,1990};
+ date d3={3,3,1990};
+ int found=0,i=0;
+ while(!found && i<n)
+ {
+  if((a[i].rDOB()==d1) || (a[i].rDOB()==d2) || (a[i].rDOB()==d3))
+  found++;
+  else
+  i++;
+ }
+ if (found)
+ a[i].show();
+}

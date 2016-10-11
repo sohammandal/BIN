@@ -1,0 +1,40 @@
+#include<iostream.h>
+#include<conio.h>
+void input(int a[5][5],int n, int m)
+{
+ for(int i=0;i<n;i++)
+ for(int j=0;j<m;j++)
+ {
+  cout<<i<<","<<j<<"?";
+  cin>>a[i][j];
+ }
+}
+void sumrow(int a[5][5],int n,int m)
+{
+ for(int i=0;i<n;i++)
+ {
+  int sum=0;
+  for(int j=0;j<m;j++)
+  sum+=a[i][j];
+  cout<<"The sum of row "<<i+1<<" is: "<<sum<<endl;
+ }
+}
+void sumcol(int a[5][5], int n, int m)
+{
+ for (int j=0;j<m;j++)
+ {
+  int sum=0;
+  for(int i=0;i<n;i++)
+  sum+=a[i][j];
+  cout<<"Sum of col is: "<<sum<<endl;
+ }
+}
+void main()
+{    clrscr();
+ int a[5][5],n,m;
+ input(a,3,4);
+ sumrow(a,3,4);
+ sumcol(a,3,4);
+ getch();
+}
+

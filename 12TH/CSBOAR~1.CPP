@@ -1,0 +1,783 @@
+#include<fstream.h>
+#include<string.h>
+#include<stdio.h>
+#include<ctype.h>
+#include<conio.h>
+#include<iomanip.h>
+
+class item
+{
+int icode;
+int iqty;
+char icategory[20];
+char iname[40];
+long int iprice;
+char idesc[200];
+public:
+void iinput()
+{
+cout<<"Enter item details\n";
+cout<<"Enter item code\n";
+cin>>icode;
+cout<<"Enter item quantity\n";
+cin>>iqty;
+cout<<"Enter item category\n";
+gets(icategory);
+cout<<"Enter item name\n";
+gets(iname);
+cout<<"Enter price of item\n";
+cin>>iprice;
+cout<<"Enter Desciption of item\n";
+gets(idesc);
+}
+void idisplay()
+{
+cout<<"\n\tItem details are as follows\n";
+cout<<"\n Item code:";
+cout<<icode<<endl;
+cout<<"\nNo. of items in stock:";
+cout<<iqty<<endl;
+cout<<"\nItem category:";
+puts(icategory);
+cout<<"\n Item name:";
+puts(iname);
+cout<<"\nPrice of item:";
+cout<<iprice<<endl;
+cout<<"\n Item description:";
+puts(idesc);
+cout<<"\n\n";
+}
+void ipurchase()
+{
+iqty--;
+}
+void iadd()
+{
+cin>>iqty;
+}
+void upgname()				//Function to upgrade item name
+{
+cout<<"Enter Item Name\n";
+gets(iname);
+}
+void upgprice()				//Function to upgrade item price
+{
+cout<<"Enter Item price\n";
+cin>>iprice;
+}
+void upgdesc()				//Function to upgrade item description
+{
+cout<<"Enter Item description\n";
+gets(idesc);
+}
+void upgcode()
+{
+cout<<"Enter Item code\n";
+cin>>icode;
+}
+void showiname()				//Function to display item in list
+{
+puts(iname);
+cout<<"\nPrice: Rs"<<iprice<<endl<<endl;
+if(iqty>0)
+cout<<"In Stock\n\n";
+else cout<<"Out of Stock\n\n";
+cout<<"ltem code:"<<icode<<endl;
+cout<<"--------------------------------"<<endl<<endl;
+}
+int comparecode(int code)
+{
+if(code==icode)
+return 1;
+else return 0;
+}
+int comparetype(char type [])
+{
+if(strcmpi(type,icategory)==0)
+return 1;
+else return 0;
+}
+int returnicode()
+{
+return icode;
+}
+long int returnamount()
+{
+return iprice;
+}
+int returnqty()
+{
+return iqty;
+}
+};
+
+struct customer
+{
+char cname[20];
+char cemail[25];
+char caddress[50];
+char cmobile[12];
+char cpassword[16];
+};
+
+void cinput (customer &c)
+{
+cout<<"Enter Name\n";
+gets(c.cname);
+cout<<"Enter email\n";
+gets(c.cemail);
+cout<<"Enter shipping address\n";
+gets(c.caddress);
+cout<<"Enter contact number\n";
+gets(c.cmobile);
+}
+
+void cregister(customer &c)
+{
+cout<<"Enter Name\n";
+gets(c.cname);
+cout<<"Enter email\n";
+gets(c.cemail);
+cout<<"Enter GO GADGET password\n";
+gets(c.cpassword);
+cout<<"Enter shipping address\n";
+gets(c.caddress);
+cout<<"Enter contact number\n";
+gets(c.cmobile);
+}
+
+void cdisplay(customer c)
+{
+cout<<"\nCustomer name:";
+puts(c.cname);
+cout<<"\nCustomer email:";
+puts(c.cemail);
+cout<<"\nCustomer address:";
+puts(c.caddress);
+cout<<"\nCustomer contact number:";
+puts(c.cmobile);
+}
+
+class bill
+{
+char bname[20];
+char bemail[25];
+char baddress[50];
+int bitemcode;
+long int bamount;
+int memonumber;
+public:
+
+void generatebill(customer c, item i)		//Function to generate bill
+{
+strcpy(bname,c.cname);
+strcpy(bemail,c.cemail);
+strcpy(baddress,c.caddress);
+bitemcode=i.returnicode();
+bamount=i.returnamount();
+}
+void displaybill()				//Function to Display bill
+{
+cout<<"Name:"<<bname<<endl;
+cout<<"Ship to"<<endl;
+puts(baddress);
+cout<<"Item code:"<<bitemcode<<endl;
+cout<<"Total amount"<<bamount<<endl;
+cout<<"Cash Memo Number is"<<memonumber<<endl;
+}
+void mnumber (int m)			//Function to insert value of memo number
+{
+memonumber=m;
+}
+};
+
+void welcomescreen()
+{
+clrscr();
+cout<<"\n\n\n\t\tWELCOME TO GO GADGET ONLINE SHOPPING";
+cout<<"\n\n\t\tWe Deal in Electronics";
+cout<<"\n\n\t\tOur mode of payment is cash on delivery";
+cout<<"\n\n\t\tDelivery will be made in 3-4 Business days";
+cout<<"\n\n\t\tWe Don't Charge for Delivery";
+cout<<"\n\n\n\t\tPress any key to continue:";
+getch();
+}
+
+void mobileinput()				//Function to add mobile
+{
+ofstream f1("mobile.dat", ios::binary | ios::app);
+item i1; char ch;
+do
+{
+i1.iinput();
+f1.write((char*)&i1,sizeof(i1));
+cout<<"Enter more?(y/n)\n";
+cin>>ch;
+} while(ch=='y' || ch=='Y');
+f1.close();
+}
+
+void desktopinput()
+{					//Function to add desktop
+ofstream f1("desktop.dat", ios::binary | ios::app);
+item i1;char ch;
+do
+{
+i1.iinput();
+f1.write((char*)&i1,sizeof(i1));
+cout<<"Enter more?(y/n)\n";
+cin>>ch;
+} while(ch=='y' || ch=='Y');
+f1.close();
+}
+
+void laptopinput()				//Function to add laptop
+{
+ofstream f1("laptop.dat", ios::binary | ios::app);
+item i1;char ch;
+do
+{
+i1.iinput();
+f1.write((char*)&i1,sizeof(i1));
+cout<<"Enter more?(y/n)\n";
+cin>>ch;
+} while(ch=='y' || ch=='Y');
+f1.close();
+}
+
+void tvinput()				//Function to add tv
+{
+ofstream f1("tv.dat", ios::binary | ios::app);
+item i1;char ch;
+do
+{
+i1.iinput();
+f1.write((char*)&i1,sizeof(i1));
+cout<<"Enter more?(y/n)\n";
+cin>>ch;
+} while(ch=='y' || ch=='Y');
+f1.close();
+}
+
+void tabletinput()				//Function to add tablet
+{
+ofstream f1("tablet.dat", ios::binary | ios::app);
+item i1;char ch;
+do
+{
+i1.iinput();
+f1.write((char*)&i1,sizeof(i1));
+cout<<"Enter more?(y/n)\n";
+cin>>ch;
+} while(ch=='y' || ch=='Y');
+f1.close();
+}
+
+void displayiname(char pname [])		//Function to display names of items
+{
+ifstream f1(pname, ios::binary);
+item i1;
+f1.read((char*)&i1,sizeof(i1));
+cout<<"\t\t\tITEM LIST"<<endl<<endl;
+do
+{
+i1.showiname();
+f1.read ((char*)&i1,sizeof(i1));
+} while(f1);
+f1.close();
+}
+
+void cregisterinput(customer &c1)		//Function to input registration in file
+{
+ofstream f1("customer.dat", ios::binary | ios::app);
+cregister(c1);
+f1.write((char*)&c1,sizeof(c1));
+f1.close();
+}
+
+void inputbill(bill b1)			//Function to input bill in file
+{
+ofstream f1("bill.dat", ios::binary | ios::app);
+f1.write((char*)&b1,sizeof(b1));
+f1.close();
+}
+
+customer returncustomer()			//Function to check password and return customer
+{
+ifstream f1("customer.dat", ios::binary);
+int flag=0;
+char ch[16];
+customer c1,c2;
+cout<<"Enter your Go Gadget Password\n";
+gets(ch);
+f1.read((char*)&c1,sizeof(c1));
+do
+{
+if(strcmp(ch,c1.cpassword)==0)
+{
+c2=c1;
+flag=1;
+break;
+}
+f1.read((char*)&c1,sizeof(c1));
+} while (f1);
+f1.close();
+if(flag==1)
+return c2;
+else
+{
+cout<<"Wrong Password\n";
+return c1;
+}
+}
+
+void updateqty(item &i)			//Function to reduce qty after purchase
+{
+item i1; long int n; int code;
+code=i.returnicode();
+if(i.comparetype("mobile")==1)
+{
+fstream f1("mobile.dat", ios::binary | ios::out | ios::in);
+f1.read((char*)&i1,sizeof(i1));
+do
+{
+if(i1.returnicode()==code)
+{
+i1.ipurchase();
+n=f1.tellg()-sizeof(i1);
+f1.seekp(n);
+f1.write((char*)&i1,sizeof(i1));
+}
+f1.read((char*)&i1,sizeof(i1));
+} while(f1);
+f1.close();
+}
+else if(i.comparetype("desktop")==1)
+{
+fstream f1("desktop.dat", ios::binary | ios::out | ios::in);
+f1.read((char*)&i1,sizeof(i1));
+do
+{
+if (i1.returnicode()==code)
+{
+i1.ipurchase();
+n=f1.tellg()-sizeof(i1);
+f1.seekp(n);
+f1.write((char*)&i1,sizeof(i1));
+}
+f1.read((char*)&i1,sizeof(i1));
+} while(f1);
+f1.close();
+}
+else if(i.comparetype("laptop")==1)
+{
+fstream f1("laptop.dat", ios::binary | ios::out | ios::in);
+f1.read((char*)&i1,sizeof(i1));
+do
+{
+if(i1.returnicode()==code)
+{
+i1.ipurchase();
+n=f1.tellg()-sizeof(i1);
+f1.seekp(n);
+f1.write((char*)&i1,sizeof(i1));
+}
+f1.read((char*)&i1,sizeof(i1));
+} while(f1);
+f1.close();
+}
+else if(i.comparetype("tv")==1)
+{
+fstream f1("tv.dat", ios::binary | ios::out | ios::in);
+f1.read((char*)&i1,sizeof(i1));
+do
+{
+if(i1.returnicode()==code)
+{
+i1.ipurchase();
+n=f1.tellg()-sizeof(i1);
+f1.seekp(n);
+f1.write((char*)&i1,sizeof(i1));
+}
+f1.read((char*)&i1,sizeof(i1));
+} while(f1);
+f1.close();
+}
+else if(i.comparetype("tablet")==1)
+{
+fstream f1("tablet.dat", ios::binary | ios::out | ios::in);
+f1.read((char*)&i1,sizeof(i1));
+do
+{
+if(i1.returnicode()==code)
+{
+i1.ipurchase();
+n=f1.tellg()-sizeof(i1);
+f1.seekp(n);
+f1.write((char*)&i1,sizeof(i1));
+}
+f1.read((char*)&i1,sizeof(i1));
+} while(f1);
+f1.close();
+}
+}
+
+void purchase (item &i,customer c)
+{
+int m=0; char ch,ch2;
+bill b1;
+b1.mnumber(m);
+b1.generatebill(c,i);
+cout<<"Continue?(y/n)";
+cin>>ch;
+if(ch=='y' || ch=='Y')
+{
+b1.displaybill();
+cout<<"Confirm Payment?(y/n). Payment mode Cash On Delivery"<<endl;
+cin>>ch2;
+if(ch2=='y' || ch2=='Y')
+{
+inputbill(b1);
+updateqty(i);
+cout<<"Purchase Successfull\nThank you for shopping with us\n";
+cout<<"You will receive your order in 3-4 business days\n";
+cout<<"Enter any key to go back to Home\n";
+getch();
+}
+else cout<<"Come again soon\n\n";
+}
+else cout<<"Come again soon\n\n";
+}
+
+void purchasemenu (item &i1)
+{
+int n;customer c;
+cout<<"Welcome to Payment screen\n";
+cout<<"Enter 1 to continue as guest"<<endl;
+cout<<"Enter 2 to register"<<endl;
+cout<<"Enter 3 if you are already a registered user"<<endl;
+cin>>n;
+if(n==1)
+{
+cinput(c);
+purchase(i1,c);
+}
+else if(n==2)
+{
+cregisterinput(c);
+purchase(i1,c);
+}
+else if(n==3)
+{c=returncustomer();
+purchase(i1,c);
+}
+else
+cout<<"Wrong choice entered\n";
+}
+
+void displayitem(char pname [])		//Function to display Item
+{
+ifstream f1(pname, ios::binary);
+item i1,i2; int code,n=0;
+cout<<"\nEnter Item code of item you want to purchase\n";
+cin>>code;
+f1.read((char*)&i1,sizeof(i1));
+do
+{
+if(i1.comparecode(code)==1)
+{
+i1.idisplay();
+i2=i1;
+n=1;
+}
+f1.read((char*)&i1,sizeof(i1));
+} while(f1);
+if(n==0)
+cout<<"Wrong code entered\n";
+f1.close();
+cout<<"Continue to purchase?(y/n)"<<endl;
+char ch;
+cin>>ch;
+if(ch=='y' || ch=='Y')
+{
+if(i2.returnqty()==0)
+cout<<"Sorry! Out of stock\n";
+else purchasemenu(i2);
+}
+else cout<<"Come again soon\n\n";
+}
+
+void upgradeitem(char pname [])		//Function to upgrade Item details
+{
+int code, ch; item i1;
+fstream f1(pname, ios::binary | ios::in | ios::out);
+cout<<"Enter item code\n";
+cin>>code;
+long int n;
+f1.read((char*)&i1,sizeof(i1));
+do
+{
+if(i1.comparecode(code)==1)
+{
+i1.idisplay();
+cout<<"Upgrade what?\n";
+cout<<"Enter 1 for quantity\n";
+cout<<"Enter 2for name\n";
+cout<<"Enter 3 for price\n";
+cout<<"Enter 4 for description\n";
+cout<<"Enter 5 for item code\n";
+cin>>ch;
+switch (ch)
+{
+	case 1:i1.iadd();
+
+			break;
+
+	case 2:i1.upgname();
+
+			break;
+
+	case 3:i1.upgprice();
+
+			break;
+
+	case 4:i1.upgdesc();
+
+			break;
+
+	case 5:i1.upgcode();
+
+			break;
+
+	default: cout<<"wrong choice entered\n";
+}
+n=f1.tellg()-sizeof(i1);
+f1.seekp(n);
+f1.write((char*)&i1,sizeof(i1));
+}
+f1.read((char*)&i1,sizeof(i1));
+} while(f1);
+f1.close();
+}
+
+void categorydisplay()
+{
+cout<<"Enter 1 for mobile\n";
+cout<<"Enter 2 for desktop\n";
+cout<<"Enter 3 for laptop\n";
+cout<<"Enter 4 for tv\n";
+cout<<"Enter 5 for tablet\n";
+}
+
+void administration()
+{
+char pass[16];
+cout<<"Enter administration password\n";
+gets(pass);
+if(strcmp(pass,"dps")==0)
+{
+cout<<"Enter 1 to add an item\n";
+cout<<"Enter 2 to upgrade an item\n";
+cout<<"Enter 3 to view items\n";
+int c,ch;
+cin>>c;
+switch(c)
+{
+	case 1:categorydisplay();
+
+	cin>>ch;
+
+	switch(ch)
+
+	{
+	case 1:mobileinput();
+
+		break;
+
+	case 2:desktopinput();
+
+		break;
+
+	case 3:laptopinput();
+
+		break;
+
+	case 4:tvinput();
+
+		break;
+
+	case 5:tabletinput();
+
+		break;
+
+	default: cout<<"Wrong choice entered\n";
+
+	}
+
+	break;
+
+	case 2:categorydisplay();
+
+	cin>>ch;
+
+	switch(ch)
+
+	{
+	case 1:upgradeitem("mobile.dat");
+
+		break;
+
+	case 2:upgradeitem("desktop.dat");
+
+		break;
+
+	case 3:upgradeitem("laptop.dat");
+
+		break;
+
+	case 4:upgradeitem("tv.dat");
+
+		break;
+
+	case 5:upgradeitem("tablet.dat");
+
+		break;
+
+	default: cout<<"Wrong choice entered\n";
+
+	}
+
+	break;
+
+	case 3:categorydisplay();
+
+	cin>>ch;
+
+	switch(ch)
+
+	{
+	case 1:displayiname("mobile.dat");
+
+		break;
+
+	case 2:displayiname("desktop.dat");
+
+		break;
+
+	case 3:displayiname("laptop.dat");
+
+		break;
+
+	case 4:displayiname("tv.dat");
+
+		break;
+
+	case 5:displayiname("tablet.dat");
+
+		break;
+
+	default: cout<<"Wrong choice entered\n";
+
+	}
+
+	break;
+
+default: cout<<"Wrong choice entered\n";
+}
+}
+
+else
+{
+cout<<"Wrong password\n";
+}
+}
+
+void shopcustomer()
+{
+int ch;
+categorydisplay();
+cin>>ch;
+
+switch(ch)
+	{
+	case 1:displayiname("mobile.dat");
+
+	displayitem("mobile.dat");
+
+	break;
+
+	case 2:displayiname("desktop.dat");
+
+	displayitem("desktop.dat");
+
+	break;
+
+	case 3:displayiname("laptop.dat");
+
+	displayitem("Iaptop.dat");
+
+	break;
+
+	case 4:displayiname("tv.dat");
+
+	displayitem("tv.dat");
+
+	break;
+
+	case 5:displayiname("tablet.dat");
+
+	displayitem("tablet.dat");
+
+	break;
+
+	default: cout<<"Wrong choice entered\n";
+	}
+}
+
+void intro()
+
+{
+clrscr();
+cout<<"\t   %% %% %%\n";
+cout<<"\t   %% %% %%  %%%%%  %%     %%%%%   %%%%   %%    %%%  %%%%%%\n";
+cout<<"\t   %% %% %%  %%     %%     %      %%   %  %%%  %%%%  %%\n";
+cout<<"\t   %% %% %%  %%%%%  %%     %      %%   %  %% %%% %%  %%%%%%\n";
+cout<<"\t   %% %% %%  %%     %%     %      %%   %  %% %%  %%  %%\n";
+cout<<"\t   %%%%%%%%  %%%%%  %%%%%  %%%%%   %%%%   %%     %%  %%%%%%\n";
+cout<<"\n";
+cout<<"\n\n\n\t\t******* SALES MANAGEMENT CBSE PROJECT*******";
+cout<<"\n\n\t\t    BY:-";
+cout<<"\n\n\t\t\t\t* SOHAM MANDAL";
+cout<<"\n\n\t\t\t\t* CLASS 12 K";
+cout<<"\n\n\t\t\t\t* ROLL NUMBER 34";
+cout<<"\n\n\n\t\t\tPress any key to continue...";
+getch();
+}
+
+void menu()
+{
+clrscr();
+cout<<"\n\t\t\t\t****MENU****";
+cout<<"\n\nEnter 1 for administration\n";
+cout<<"Enter 2 for customer\n";
+int ch;
+cin>>ch;
+if(ch==1)
+administration();
+else if(ch==2)
+shopcustomer();
+}
+
+void main()
+{
+char ch;
+intro();
+do
+{
+welcomescreen();
+menu();
+cout<<"Back to Home?(y/n)\n";
+cin>>ch;
+} while (ch=='y' || ch=='Y');
+}
+

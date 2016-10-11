@@ -1,0 +1,92 @@
+#include<iostream.h>
+#include<conio.h>
+void bubble(int [],int);
+void selection(int [],int);
+void insertion(int [],int);
+void display(int [],int);
+void main()
+{
+ int n,year[100];
+ cout<<"Enter no. of students: "<<endl;
+ cin>>n;
+ for(int i=0,i<n;i++)
+ cin>>year[i];
+ do
+ {
+ int exit=0;
+ char ch;
+ cout<<"1. Bubble Sort (asc.) 2. Selection Sort (asc.) 3. Insertion Sort (asc.) 4. Display 5. Quit"<<endl;
+ cin>>ch;
+ if (ch=="1")
+ bubble(year,n);
+ else if (ch=="2")
+ selection(year,n);
+ else if (ch=="3")
+ insertion(year,n);
+ else if (ch=="4")
+ display(year,n);
+ else
+ exit=1;
+ }
+while (exit!="1");
+getch();
+}
+void bubble(int a[],int n)
+{
+ for (int i=0;i<n-1;i++)
+ {
+  for (int j=0;j<n-i-1;j++)
+   if (a[j]>a[j+1])
+   {
+    int t=a[j];
+    a[j]=a[j+1];
+    a[j+1]=t;
+   }
+ }
+ cout<<"In ascending order: ";
+ for(int k=0;k<n;k++)
+ cout<<a[k]<<" ";
+}
+void selection(int a[],int n)
+{
+ for (int i=0;i<n-1;i++)
+ {
+  int small=i;
+  for (int j=i+1;j<n;j++)
+   if (a[small]>a[j])
+    small=j;
+   if (small!=i)
+   {
+    int t=a[small];
+    a[small]=a[i];
+    a[i]=t;
+   }
+  }
+  cout<<"In ascending order: ";
+  for(int s=0;s<n;s++)
+  cout<<a[s]<<" ";
+}
+void insertion(int a[],int n)
+{
+ for (int i=1;i<n;i++)
+ {
+  int temp=a[i],j=i-1;
+  while(temp<a[j] && j>=0)
+  {
+   a[j+1]=a[j];
+   j--;
+  }
+ a[j+1]=temp;
+ }
+ cout<<"In ascending order: ";
+ for (int k=0;k<n;k++)
+ cout<<a[k]<<" ";
+}
+void display(int a[],int n)
+{
+ for (int k=0,k<n,k++)
+ cout<<a[k]<<" ";
+}
+
+
+

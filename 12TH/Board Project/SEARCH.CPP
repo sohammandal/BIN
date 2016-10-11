@@ -1,0 +1,101 @@
+void viewstudent()
+{
+ clrscr();
+ fstream Fil;
+ student s;
+ int choice,n,found=0;
+ Fil.open("student.dat", ios::binary | ios::in);
+ cout<<"\nEnter 1 if you would like to view all students\n";
+ cout<<"Enter 2 if you want to view a particular record\n";
+ cin>>choice;
+ if(choice==1)
+ {
+  while (Fil.read((char*)&s,sizeof(s)))
+  {
+   s.display();
+  }
+ }
+ else if (choice==2)
+ {
+  cout<<"\nSearch by:\n1.Name\n2.Admno\n3.Stream\n4.Percentage\n5.Phone\n";
+  cin>>n;
+  if(n==1)
+  {
+   char namequery[40];
+   cout<<"\nEnter Name: "; gets(namequery);
+   while (Fil.read((char*)&s,sizeof(s)))
+   {
+    if (s.comparename(namequery))
+    {
+     s.display();
+     found++;
+    }
+   }
+   if (found==0)
+   cout<<"Record not found..\n";
+  }
+  else if(n==2)
+  {
+   int admnoquery;
+   cout<<"\nEnter Admno: "; cin>>admnoquery;
+   while (Fil.read((char*)&s,sizeof(s)))
+   {
+    if (s.giveadmno()==admnoquery)
+    {
+     s.display();
+     found++;
+    }
+   }
+   if (found==0)
+   cout<<"Record not found..\n";
+  }
+  else if(n==3)
+  {
+   char streamquery[20];
+   cout<<"\nEnter Stream: "; gets(streamquery);
+   while (Fil.read((char*)&s,sizeof(s)))
+   {
+    if (s.comparestream(streamquery))
+    {
+     s.display();
+     found++;
+    }
+   }
+   if (found==0)
+   cout<<"Record not found..\n";
+  }
+  else if(n==4)
+  {
+   int percentquery;
+   cout<<"\nEnter Name: "; cin>>percentquery;
+   while (Fil.read((char*)&s,sizeof(s)))
+   {
+    if (s.givepercentage()==percentquery)
+    {
+     s.display();
+     found++;
+    }
+   }
+   if (found==0)
+   cout<<"Record not found..\n";
+  }
+  else if(n==5)
+  {
+   int phonequery;
+   cout<<"\nEnter Phone: "; cin>>phonequery;
+   while (Fil.read((char*)&s,sizeof(s)))
+   {
+    if (s.givephone()==phonequery)
+    {
+     s.display();
+     found++;
+    }
+   }
+   if (found==0)
+   cout<<"Record not found..\n";
+  }
+  else
+  cout<<"Wrong Input..";
+ }
+ Fil.close();
+}

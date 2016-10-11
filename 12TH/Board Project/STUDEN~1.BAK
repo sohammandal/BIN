@@ -1,0 +1,193 @@
+/*
+Student Database
+Name
+Admission No.
+Stream
+Percentage
+Phone
+Address
+*/
+#include<fstream.h>
+#include<string.h>
+#include<stdio.h>
+#include<ctype.h>
+#include<conio.h>
+#include<iomanip.h>
+
+class student
+{
+ int admno;
+ float percentage;
+ char name[40];
+ char stream[10];
+ int phone;
+ char address[10];
+ public:
+ void add()
+  {
+  cout<<"\nEnter Name of Student: \n";
+  gets(name);
+  cout<<"\nEnter Admission No. of Student: \n";
+  cin>>admno;
+  cout<<"\nEnter Stream of Student: \n";
+  gets(stream);
+  cout<<"\nEnter Percentage of Student: \n";
+  cin>>percentage;
+  cout<<"\nEnter Phone Number of Student: \n";
+  cin>>phone;
+  cout<<"\nEnter Address of Student: \n";
+  gets(address);
+  }
+ void display()
+  {
+  cout<<"\nDetails of "; puts(name); cout<<" are as follows:";
+  cout<<"\nAdmission Number: "<<admno;
+  cout<<"\nStream: "; puts(stream);
+  cout<<"\nPercentage: "<<percentage<<"%";
+  cout<<"\nPhone No.: "<<phone;
+  cout<<"\nAddress: "; puts(address);
+  cout<<"\n\n";
+  }
+ void changename()
+  {
+  cout<<"\nEnter Name of Student: \n";
+  gets(name);
+  }
+ void changeadmno()
+  {
+  cout<<"\nEnter Admission No. of Student: \n";
+  cin>>admno;
+  }
+ void changestream()
+  {
+  cout<<"\nEnter Stream of Student: \n";
+  gets(stream);
+  }
+ void changepercentage()
+  {
+  cout<<"\nEnter Percentage of Student: \n";
+  cin>>percentage;
+  }
+ void changephone()
+  {
+  cout<<"\nEnter Phone Number of Student: \n";
+  cin>>phone;
+  }
+ void changeaddress()
+  {
+  cout<<"\nEnter Address of Student: \n";
+  gets(address);
+  }
+ int matchadmno(int n)
+  {
+  if (n==admno)
+  return 1;
+  else
+  return 0;
+  }
+ int giveadmno()
+  {
+  return admno;
+  }
+};
+
+void enterstudent()
+{
+ fstream Fil;
+ Fil.open("student.dat", ios::binary | ios::app);
+ student s; char ch;
+ do
+ {
+  s.add();
+  Fil.write((char*)&s,sizeof(s));
+  cout<<"\nAdd another student?";
+  cin>>ch;
+ }
+ while (ch=='y' || ch=='Y');
+ Fil.close();
+}
+
+void editstudent()
+{
+  int admiss, choice, found;
+  student s;
+  fstream Fil;
+  Fil.open("student.dat", ios::binary | ios::in);
+  cout<<"\nEnter Admission No. of student: ";
+  cin>>admiss;
+  while (Fil.read((char*)&s,sizeof(s)))
+  {
+  if (admiss==s.giveadmno())
+  {
+   cout<<"\nWhat would you like to change?\n";
+   cout<<"1. Name\n2. Admission No.\n3. Stream\n4. Percentage\n";
+   cout<<"5. Phone\n6. Address\n";
+   cin>>choice;
+
+   switch(choice)
+   {
+    case 1: s.changename(); 		break;
+    case 2: s.changeadmno(); 		break;
+    case 3: s.changestream();		break;
+    case 4: s.changepercentage();       break;
+    case 5: s.changephone();		break;
+    case 6: s.changeaddress();		break;
+    default: cout<<"Wrong Input..\n";
+   }
+   found++;
+  }
+  if (found==0)
+  cout<<"\nStudent not found!..\n";
+  Fil.close();
+}
+
+void viewstudent()
+{
+ fstream Fil;
+ student s;
+ int choice,n;
+ Fil.open("student.dat", ios::binary | ios::in);
+ cout<<"Enter 1 if you would like to view all students\n";
+ cout<<"Enter 2 if you want to view a particular record\n";
+ cin>>choice;
+ if(choice==1)
+ {
+  while (Fil.read((char*)&s,sizeof(s)))
+  {
+   s.display();
+  }
+ }
+ else if (choice==2)
+ {
+  cout<<"\nEnter Admission No.: \n";
+  cin>>n;
+  while (Fil.read((char*)&s,sizeof(s)))
+  {
+   if (s.giveadmno()==n)
+   {
+    s.display();
+    found++;
+   }
+  }
+  if (found==0)
+   cout<<"Record not found..\n";
+ }
+ Fil.close();
+}
+void main()
+{
+ clrscr();
+ int n;
+ student s;
+ cout<<"1. Add\n2. Edit\n3. View";
+ cin>>n;
+ if (n==1)
+ enterstudent();
+ else if (n==2)
+ editstudent();
+ else if (n==3)
+ viewstudent();
+ else
+ getch();
+ getch();
+}

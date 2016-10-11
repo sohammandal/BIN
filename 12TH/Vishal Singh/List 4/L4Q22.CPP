@@ -1,0 +1,132 @@
+/*
+List 4 Program 22
+Group 11
+Developed By: Soham Mandal, Shubham Kumar, Shivam Raj
+*/
+
+#include<iostream.h>
+#include<conio.h>
+#include<stdio.h>
+
+struct Book
+{
+  int Bno;
+  char Bname[25];
+  Book *Next;
+};
+
+class Stack
+{
+ Book *top;
+ public:
+ Stack(){top=NULL;}
+ void push();
+ void pop();
+ void disp();
+ ~Stack();
+};
+
+void Stack::push()
+{
+  Book *temp=new Book;
+  cout<<"Enter BNO: ";
+  cin>>temp->Bno;
+  cout<<"Enter BNAME: ";
+  gets(temp->Bname);
+  temp->Next=top;
+  top=temp;
+}
+
+void Stack::pop()
+{
+  if(top!=NULL)
+  {
+    Book *temp=top;
+    cout<<top->Bno<<" "<<top->Bname<<".....deleted\n";
+    top=top->Next;
+    delete temp;
+  }
+  else
+    cout<<"STACK EMPTY\n";
+}
+
+void Stack::disp()
+{
+  if(top!=NULL)
+  {
+    Book *temp=top;
+    while(temp!=NULL)
+      {
+	cout<<temp->Bno<<" "<<temp->Bname<<"\n";
+	temp=temp->Next;
+      }
+  }
+  else
+     cout<<"STACK EMPTY\n";
+}
+
+Stack::~Stack()
+{
+  while(top!=NULL)
+  {
+    Book *temp=top;
+    top=top->Next;
+    delete temp;
+  }
+}
+
+void main()
+{
+  clrscr();
+  Stack B;
+  char ch;
+  do
+   {
+     cout<<"1.Push\n2.Pop\n3.Display\n4.Quit\nEnter your choice : ";
+     cin>>ch;
+     switch(ch)
+     {
+	case '1':B.push();
+		 break;
+	case '2':B.pop();
+		 break;
+	case '3':B.disp();
+		 break;
+     }
+   }while(ch!='4');
+  getch();
+}
+
+/*============OUTPUT==============
+1.Push
+2.Pop
+3.Display
+4.Quit
+Enter your choice : 1
+Enter BNO: 234
+Enter BNAME: hello
+1.Push
+2.Pop
+3.Display
+4.Quit
+Enter your choice : 1
+Enter BNO: 123
+Enter BNAME: queen
+1.Push
+2.Pop
+3.Display
+4.Quit
+Enter your choice : 2
+123 queen.....deleted
+1.Push
+2.Pop
+3.Display
+4.Quit
+Enter your choice : 2
+234 hello.....deleted
+1.Push
+2.Pop
+3.Display
+4.Quit
+Enter your choice : 4
+*/

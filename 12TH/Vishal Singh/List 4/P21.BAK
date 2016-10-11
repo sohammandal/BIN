@@ -1,0 +1,126 @@
+/*
+List 4 Program 21
+Group 11
+Developed By: Soham Mandal, Shubham Kumar, Shivam Raj
+*/
+
+#include<iostream.h>
+#include<conio.h>
+#include<stdio.h>
+
+const int max=9;
+
+struct Student
+{
+  int Admno;
+  char Name[20];
+};
+
+void Qinsert(Student S[],int &r,int f)
+{
+  if((r+1)%max!=f)
+  {
+    r=(r+1)%max;
+    cout<<"Admno: ";
+    cin>>S[r].Admno;
+    cout<<"Name: ";
+    gets(S[r].Name);
+    cout<<endl;
+  }
+  else
+    cout<<"Queue is Full!\n"<<endl;
+}
+
+void Qdelete(Student S[],int r,int &f)
+{
+  if(r!=f)
+  {
+    f=(f+1)%max;
+    cout<<S[f].Name<<": "<<S[f].Admno<<" removed..\n";
+  }
+  else
+    cout<<"Queue is Empty\n";
+}
+
+void Qdisplay(Student S[],int r,int f)
+{
+  int cn=f;
+  while(cn!=r)
+  {
+    cn=(cn+1)%max;
+    cout<<S[cn].Admno<<": "<<S[cn].Name<<"\n";
+  }
+  cout<<endl;
+}
+
+void main()
+{
+  clrscr();
+  Student S[max];
+  int rear=0,front=0;
+  char ch;
+  do
+   {
+     cout<<"Enter your choice";
+     cout<<"\n 1.Insert\n 2.Delete\n 3.Display \n 4.Quit \n ";
+     cin>>ch;
+     switch(ch)
+     {
+	case '1':Qinsert(S,rear,front);
+		 break;
+	case '2':Qdelete(S,rear,front);
+		 break;
+	case '3':Qdisplay(S,rear,front);
+		 break;
+     }
+   }while(ch!='4');
+  getch();
+}
+
+
+
+
+/*==============OUTPUT==========
+Enter your choice
+ 1.Insert
+ 2.Delete
+ 3.Display
+ 4.Quit
+ 1
+Admno: 234
+Name: rohan
+
+Enter your choice
+ 1.Insert
+ 2.Delete
+ 3.Display
+ 4.Quit
+ 1
+Admno: 123
+Name: rahul
+
+Enter your choice
+ 1.Insert
+ 2.Delete
+ 3.Display
+ 4.Quit
+ 2
+rohan: 234 removed..
+
+Enter your choice
+ 1.Insert
+ 2.Delete
+ 3.Display
+ 4.Quit
+ 2
+rahul: 123 removed..
+
+Enter your choice
+ 1.Insert
+ 2.Delete
+ 3.Display
+ 4.Quit
+ 4
+
+
+*/

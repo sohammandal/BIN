@@ -1,0 +1,26 @@
+********* OUTPUT ***********
+
+Book Number: 2
+
+Book Number: 0
+
+Book Author: 10
+
+Book Name: 10
+Book Price: 0
+Press 1 to Enter Details
+Press 2 to Display Details
+Press 3 to Find the Book No.
+Press 4 to Exit
+3
+Enter the Book No. to be searched :
+002
+Book No. :2
+Book Author :D.C Pandey
+Book Name :Bayern Munich
+Book Price :225
+Press 1 to Enter Details
+Press 2 to Display Details
+Press 3 to Find the Book No.
+Press 4 to Exit
+4
